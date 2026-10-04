@@ -28,6 +28,18 @@ winver
 
 The application will also be available from your Linux application menu.
 
-## Screenshot
+## Uninstall
+
+```bash
+rm -rf ~/.local/bin/winver
+```
+
+## Video and Screenshot
+
+### How To Install
+
+https://github.com/user-attachments/assets/0b5bd3ff-0d85-48eb-bf08-1309ce95127b
+
+### Screenshot
 
 ![Winver Femboy Edition](https://raw.githubusercontent.com/CatKub/winver-femboy-edition-for-linux/main/photo1.png)
