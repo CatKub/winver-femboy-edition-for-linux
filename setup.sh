@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+rm -rf ~/.local/bin/winver
+
 set -e
 
 echo "========================================"
@@ -74,115 +76,25 @@ echo
 
 mkdir -p ~/.local/bin
 
-cat > ~/.local/bin/winver <<'EOF'
+cat << 'EOF' > ~/.local/bin/winver
 #!/bin/bash
 
-HTML_FILE="/tmp/winver_window.html"
+LOGO_TEXT='<span foreground="#0078d4" font="28">█ █\n█ █</span>'
 
-cat > "$HTML_FILE" <<'HTML_EOF'
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <style>
-        body {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-            font-size: 13px;
-            background-color: #fcf6f8;
-            color: #202020;
-            margin: 0;
-            padding: 0;
-            user-select: none;
-            overflow: hidden;
-        }
+yad --title="About Windows" \
+    --width=480 \
+    --height=420 \
+    --center \
+    --fixed \
+    --window-icon="info" \
+    --text-align=left \
+    --text="
+$LOGO_TEXT   <span font='22' foreground='#0078d4'>Windows 11</span>
+            <span font='22' weight='bold' foreground='#0078d4'>Femboy Edition</span>
 
-        .title-text {
-            font-size: 12px;
-            color: #333333;
-            font-weight: 500;
-        }
+────────────────────────────────────────────────────────────
 
-        .close-btn:hover {echo "About Windows closed."
-            background-color: #e81123;
-            color: white;
-        }
-
-        .main-container {
-            padding: 25px 30px;
-        }
-
-        .header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            margin-top: 5px;
-        }
-
-        .logo {
-            width: 58px;
-            height: 58px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-gap: 5px;
-            margin-right: 24px;
-        }
-
-        .logo .pink-ch {
-            background-color: #0078d4;
-        }
-
-        .logo .blue-ch {
-            background-color: #0078d4;
-        }
-
-        .title {
-            font-size: 34px;
-            color: #0078d4;
-            font-weight: 400;
-            letter-spacing: -0.5px;
-        }
-
-        .title span {
-            color: #0078d4;
-            font-weight: 600;
-        }
-
-        .divider {
-            height: 1px;
-            background-color: #0078d4;
-            margin-bottom: 22px;
-        }
-
-        .content {
-            line-height: 1.5;
-            white-space: pre-line;
-            margin-bottom: 15px;
-        }
-
-        .indent {
-            padding-left: 35px;
-            line-height: 1.4;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="main-container">
-        <div class="header">
-            <div class="logo">
-                <div class="blue-ch"></div><div class="pink-ch"></div>
-                <div class="pink-ch"></div><div class="blue-ch"></div>
-            </div>
-
-            <div class="title">
-                Windows 11 <br>
-                <span>Femboy Edition</span>
-            </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="content">Microsoft Windows
+<b>Microsoft Windows</b>
 Version 67H2 (OS Build 67670.6767)
 © Microsoft Corporation. All rights reserved.
 
@@ -190,27 +102,12 @@ The Windows 11 Femboy Edition operating system and its user interface are protec
 
 Evaluation copy. Expires 67/67/6767 67:67 PM
 
-This product is licensed under the Microsoft Software License Terms to:</div>
-
-        <div class="indent">user name
-User</div>
-    </div>
-</body>
-</html>
-HTML_EOF
-
-yad --title="About Windows" \
-    --width=520 \
-    --height=540 \
-    --fixed \
-    --center \
-    --undecorated \
-    --html \
-    --browser \
-    --uri="file://$HTML_FILE" \
+This product is licensed under the Microsoft Software License Terms to:
+    <b>user name</b>
+    <b>User</b>
+" \
     --button="OK:0"
 
-rm -f "$HTML_FILE"
 EOF
 
 chmod +x ~/.local/bin/winver
